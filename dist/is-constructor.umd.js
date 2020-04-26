@@ -1,8 +1,10 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-	typeof define === 'function' && define.amd ? define(factory) :
-	(global = global || self, global['is-constructor'] = factory());
-}(this, (function () { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@bemoje/is-function')) :
+	typeof define === 'function' && define.amd ? define(['@bemoje/is-function'], factory) :
+	(global = global || self, global['is-constructor'] = factory(global.isFunction));
+}(this, (function (isFunction) { 'use strict';
+
+	isFunction = isFunction && Object.prototype.hasOwnProperty.call(isFunction, 'default') ? isFunction['default'] : isFunction;
 
 	/**
 	 * Returns true if 'value' is a constructor
@@ -10,7 +12,7 @@
 	 * @returns {boolean}
 	 */
 	function isConstructor(constructor) {
-		if (typeof constructor !== 'function') {
+		if (!isFunction(constructor)) {
 			return false
 		}
 

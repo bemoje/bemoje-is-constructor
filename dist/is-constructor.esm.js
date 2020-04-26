@@ -1,10 +1,12 @@
+import isFunction from '@bemoje/is-function';
+
 /**
  * Returns true if 'value' is a constructor
  * @param {*} constructor - The value to evaluate
  * @returns {boolean}
  */
 function isConstructor(constructor) {
-	if (typeof constructor !== 'function') {
+	if (!isFunction(constructor)) {
 		return false
 	}
 
